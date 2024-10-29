@@ -77,7 +77,7 @@ const Tabs = () => {
           <button
             key={tab}
             onClick={() => setSelectedTab(tab)}
-            style={selectedTab === tab ? { color: '#1a5464', backgroundColor: '#14b7e9' } : {}}
+            style={selectedTab === tab ? { color: 'white', backgroundColor: '#094555' } : {}}
            
           >
             {tab}
