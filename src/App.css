@@ -14,10 +14,53 @@ body {
     width: 960px;
     margin: 0 auto;
 }
-/* TODO: Add css here */
+
 .tabs {
+    display: flex;
+    border-bottom: 2px solid #333;
+    background-color: #222;
+    padding: 2px 0;
+}
+
+.tabs button {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #ddd;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tabs button:hover {
+    background-color: #444;
+}
+
+.active-tab {
+    color: #eceff0;
+    background-color: #1a5464;
+   padding: 10px 15px;
+    border-bottom: 2px solid #14b7e9; 
 
 }
+
+
+
+.tab-content {
+    padding: 40px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.tab-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
 
 
 @media only screen and (max-width: 960px) {

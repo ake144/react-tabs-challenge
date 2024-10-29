@@ -1,4 +1,7 @@
-import React from 'react';
+
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
+
 
 const Tabs = () => {
 
@@ -29,10 +32,72 @@ const Tabs = () => {
     //     }
     // ];
 
+
+
+    const fetchText = async (tab) => {
+        const tabNumber = tab.split(' ')[1];
+        const response = await fetch(`https://api.allorigins.win/raw?url=http://loripsum.net/api/10/short/${tabNumber}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+
+        });
+        if (!response.ok) {
+            throw new Error('Failed to fetch data');
+        }
+        return response.text();
+    };
+    
+
+    function removeHtmlTags(input) {
+        return input.replace(/<\/?[^>]+(>|$)/g, "");
+    }
+
+
+    const [selectedTab, setSelectedTab] = useState('Tab 1');
+
+ 
+    const { data, isLoading, error } = useQuery(
+      ['tabContent', selectedTab],
+      () => fetchText(selectedTab),
+      { cacheTime: 1000 * 60 * 10 } 
+    );
+
+
+    console.log(data);
+
     return (
         <div className='container'>
             {/* TODO Add tabs here */}
-        </div>
+
+
+      <div className="tabs">
+        {['Tab 1', 'Tab 2', 'Tab 3', 'Tab 4'].map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setSelectedTab(tab)}
+            style={selectedTab === tab ? { color: '#1a5464', backgroundColor: '#14b7e9' } : {}}
+           
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+      <div className="tab-content">
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Error fetching content</p>
+        ) : (
+          <div>
+            <h2>{selectedTab}</h2>
+            <code>{removeHtmlTags(data)}</code>
+          </div>
+        )}
+      </div>
+    </div>
+
     );
 }
 
