@@ -65,7 +65,8 @@ const Tabs = () => {
     );
 
 
-    console.log(data);
+
+
 
     return (
         <div className='container'>
@@ -92,7 +93,7 @@ const Tabs = () => {
         ) : (
           <div>
             <h2>{selectedTab}</h2>
-            <code>{removeHtmlTags(data)}</code>
+            <p>{removeHtmlTags(data)}</p>
           </div>
         )}
       </div>
